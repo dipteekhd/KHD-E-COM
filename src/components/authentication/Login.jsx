@@ -1,5 +1,5 @@
 import React from 'react';
-import './authentication.scss';
+import './Authentication.scss';
 
 export const Login = () => {
   return (

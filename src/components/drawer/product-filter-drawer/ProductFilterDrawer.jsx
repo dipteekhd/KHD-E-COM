@@ -1,13 +1,13 @@
 import React from 'react';
-import './Drawer.scss';
+import './ProductFilterDrawer.scss';
 import {
   CategoryFilter,
   RatingFilter,
   PriceSortFilter,
   PriceRangeFilter,
-} from '../product-filter';
+} from '../../product-filter';
 
-export const Drawer = () => {
+export const ProductFilterDrawer = () => {
   return (
     <>
       <aside className="drawer drawer--permanent">

@@ -1,12 +1,11 @@
 import React from 'react';
 import './ProductList.scss';
 import { ProductVerticalCard } from '../../shared/components';
-import { Drawer } from '../drawer/Drawer';
-
+import { ProductFilterDrawer } from '../../components';
 export const ProductList = () => {
   return (
     <>
-      <Drawer></Drawer>
+      <ProductFilterDrawer></ProductFilterDrawer>
       <main className="products center-content p-sm-all">
         <h4 className="m-sm-b">Showing 1 – 6 of 10 results</h4>
         <section className="product-list center-content">
