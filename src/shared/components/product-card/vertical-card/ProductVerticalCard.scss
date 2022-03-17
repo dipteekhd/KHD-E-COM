@@ -1,0 +1,18 @@
+.card--vr {
+  .card {
+    &__badge-icon {
+      height: 16rem;
+    }
+    &__action--like {
+      top: 0;
+      color: var(--primary);
+    }
+    &__media {
+      border-radius: unset;
+      object-fit: contain;
+      max-height: 100%;
+      height: 80%;
+      width: 70%;
+    }
+  }
+}

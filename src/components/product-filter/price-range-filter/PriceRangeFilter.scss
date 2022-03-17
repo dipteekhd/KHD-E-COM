@@ -1,0 +1,15 @@
+.priceRange {
+  display: flex;
+  justify-content: space-between;
+}
+
+.priceRange,
+.priceInput {
+  width: 40%;
+}
+@media screen and (min-width: 768px) {
+  .priceRange,
+  .priceInput {
+    width: 80%;
+  }
+}
