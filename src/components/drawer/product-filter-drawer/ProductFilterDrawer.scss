@@ -1,0 +1,11 @@
+.drawer {
+  background-color: var(--white);
+}
+@media screen and (min-width: 768px) {
+  .drawer {
+    position: sticky;
+    top: 4rem;
+    height: 45rem;
+    overflow-y: auto;
+  }
+}

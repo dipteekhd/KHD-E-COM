@@ -1,0 +1,11 @@
+.home {
+  flex-direction: column;
+  &__title {
+    color: var(--secondary);
+  }
+  .category {
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 80%;
+  }
+}

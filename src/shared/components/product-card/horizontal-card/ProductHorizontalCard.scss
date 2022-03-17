@@ -1,0 +1,61 @@
+.card--hr {
+  .card {
+    &__media-container {
+      width: 15rem;
+      background-color: var(--grey-200);
+      border-radius: 5px 0 0 5px;
+    }
+    &__media {
+      object-fit: contain;
+      max-height: 100%;
+      height: 100%;
+      width: 100%;
+      border-radius: unset;
+    }
+    &__secondary-info {
+      width: 70%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    &__quantity {
+      border: 1px solid var(--primary);
+    }
+    &__price {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+    &__price-old {
+      text-decoration: line-through;
+    }
+    &__offer {
+      color: var(--primary);
+    }
+  }
+}
+
+.btn--quantity {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+@media screen and (max-width: 500px) {
+  .card--hr {
+    .card {
+      &__media-container {
+        width: 100%;
+        height: 16rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px 5px 0 0;
+      }
+      &__media {
+        object-fit: contain;
+        height: 80%;
+        width: 70%;
+      }
+    }
+  }
+}
