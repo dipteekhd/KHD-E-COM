@@ -6,15 +6,21 @@ import {
   PriceSortFilter,
   PriceRangeFilter,
 } from '../../product-filter';
+import * as ACTIONS from '../../../shared/actions/types';
+import { useProductFilter } from '../../../shared/context/product-filter-context';
 
 export const ProductFilterDrawer = () => {
+  const { dispatch } = useProductFilter();
   return (
     <>
       <aside className="drawer drawer--permanent">
         <nav>
           <section className="filter m-xs-all">
             <h4>Filters</h4>
-            <button className="btn btn--default-text btn--clear p-xs-vr p-sm-hr rounded-sm bold-font">
+            <button
+              className="btn btn--default-text btn--clear p-xs-vr p-sm-hr rounded-sm bold-font"
+              onClick={() => dispatch({ type: ACTIONS.CLEAR_ALL_FILTER })}
+            >
               CLEAR
             </button>
           </section>

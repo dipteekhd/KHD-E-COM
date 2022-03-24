@@ -1,7 +1,11 @@
 import React from 'react';
+import * as ACTIONS from '../../../shared/actions/types';
+import { useProductFilter } from '../../../shared/context';
+
 import './PriceRangeFilter.scss';
 
 export const PriceRangeFilter = () => {
+  const { state, dispatch } = useProductFilter();
   return (
     <>
       <h4>Price Range</h4>
@@ -16,7 +20,13 @@ export const PriceRangeFilter = () => {
           type="range"
           max="3000"
           min="1000"
-          onChange={() => {}}
+          value={state.priceRangeFilter}
+          onChange={(e) =>
+            dispatch({
+              type: ACTIONS.FILTER_BY_PRICE_RANGE,
+              priceRange: e.target.value,
+            })
+          }
         />
       </div>
     </>

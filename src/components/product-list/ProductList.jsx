@@ -2,17 +2,50 @@ import React from 'react';
 import './ProductList.scss';
 import { ProductVerticalCard } from '../../shared/components';
 import { ProductFilterDrawer } from '../../components';
+import { useProductAsync } from './useProductAsync';
+import {
+  getFilteredProducts,
+  getSortedProducts,
+} from '../../shared/product.util';
+import { useProductFilter } from '../../shared/context';
+
 export const ProductList = () => {
+  const { products, loader } = useProductAsync();
+  const { state } = useProductFilter();
+  const { categoryFilter, ratingFilter, priceSortCriteria, priceRangeFilter } =
+    state;
+
+  const sortedProducts = getSortedProducts(products, priceSortCriteria);
+  const filteredProducts = getFilteredProducts(
+    sortedProducts,
+    categoryFilter,
+    ratingFilter,
+    priceRangeFilter
+  );
+
   return (
     <>
       <ProductFilterDrawer></ProductFilterDrawer>
       <main className="products center-content p-sm-all">
-        <h4 className="m-sm-b">Showing 1 – 6 of 10 results</h4>
+        {filteredProducts.length === 0
+          ? 'No products found for applied filters.Please change the filter to get products!'
+          : null}
+        {!loader ? (
+          <h4 className="m-sm-b">
+            Showing {filteredProducts.length}/ {products.length}
+            results
+          </h4>
+        ) : null}
+        {loader ? (
+          <div className="alert alert--info  p-sm-all rounded-sm" role="alert">
+            <p className="text-sm">Loading...</p>
+          </div>
+        ) : null}
         <section className="product-list center-content">
-          {[1, 2, 3, 4, 5, 6].map((product) => (
+          {filteredProducts.map((product) => (
             <ProductVerticalCard
-              key={product}
-              {...product}
+              key={product._id}
+              product={product}
               actionBtnText="ADD TO CART"
             ></ProductVerticalCard>
           ))}

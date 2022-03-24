@@ -1,12 +1,15 @@
 import './Header.scss';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export const Header = () => {
   return (
     <header className="header">
       <div className="header__wrapper p-sm-vr">
         <div className="header__title p-sm-hr">
-          <h3>E-Commerce</h3>
+          <Link to="/">
+            <h3>E-Commerce</h3>
+          </Link>
         </div>
 
         <nav className="header__action">
