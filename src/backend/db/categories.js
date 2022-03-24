@@ -1,4 +1,9 @@
 import { v4 as uuid } from 'uuid';
+import E1 from '../../assets/images/earings/E1.jpg';
+import N1 from '../../assets/images/necklace/N1.jpg';
+import R1 from '../../assets/images/rings/R1.jpg';
+import W1 from '../../assets/images/wedding/wed1.jpg';
+import J1 from '../../assets/images/J.jpg';
 
 /**
  * Category Database can be added here.
@@ -8,20 +13,27 @@ import { v4 as uuid } from 'uuid';
 export const categories = [
   {
     _id: uuid(),
-    categoryName: 'fiction',
-    description:
-      'literature in the form of prose, especially novels, that describes imaginary events and people',
+    categoryName: 'All Jewellery',
+    imgUrl: J1,
   },
   {
     _id: uuid(),
-    categoryName: 'non-fiction',
-    description:
-      'Non-fiction is writing that gives information or describes real events, rather than telling a story.',
+    categoryName: 'Wedding Sets',
+    imgUrl: W1,
   },
   {
     _id: uuid(),
-    categoryName: 'horror',
-    description:
-      'Meant to cause discomfort and fear for both the character and readers, horror writers often make use of supernatural and paranormal elements in morbid stories that are sometimes a little too realistic.',
+    categoryName: 'Necklace',
+    imgUrl: N1,
+  },
+  {
+    _id: uuid(),
+    categoryName: 'Rings',
+    imgUrl: R1,
+  },
+  {
+    _id: uuid(),
+    categoryName: 'Earrings',
+    imgUrl: E1,
   },
 ];
