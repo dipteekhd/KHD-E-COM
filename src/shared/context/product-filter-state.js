@@ -11,6 +11,6 @@ export const productFilterState = {
     [c4]: false,
   },
   ratingFilter: 0,
-  priceSortCriteria: 'highToLowPrice',
+  priceSortCriteria: '',
   priceRangeFilter: 3000,
 };

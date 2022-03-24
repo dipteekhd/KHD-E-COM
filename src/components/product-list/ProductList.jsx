@@ -15,24 +15,24 @@ export const ProductList = () => {
   const { categoryFilter, ratingFilter, priceSortCriteria, priceRangeFilter } =
     state;
 
-  const sortedProducts = getSortedProducts(products, priceSortCriteria);
   const filteredProducts = getFilteredProducts(
-    sortedProducts,
+    products,
     categoryFilter,
     ratingFilter,
     priceRangeFilter
   );
+  const sortedProducts = getSortedProducts(filteredProducts, priceSortCriteria);
 
   return (
     <>
       <ProductFilterDrawer></ProductFilterDrawer>
       <main className="products center-content p-sm-all">
-        {filteredProducts.length === 0
+        {sortedProducts.length === 0
           ? 'No products found for applied filters.Please change the filter to get products!'
           : null}
         {!loader ? (
           <h4 className="m-sm-b">
-            Showing {filteredProducts.length}/ {products.length}
+            Showing {sortedProducts.length}/ {products.length}
             results
           </h4>
         ) : null}
@@ -42,7 +42,7 @@ export const ProductList = () => {
           </div>
         ) : null}
         <section className="product-list center-content">
-          {filteredProducts.map((product) => (
+          {sortedProducts.map((product) => (
             <ProductVerticalCard
               key={product._id}
               product={product}
