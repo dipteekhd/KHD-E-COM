@@ -27,7 +27,7 @@ export const ProductList = () => {
     <>
       <ProductFilterDrawer></ProductFilterDrawer>
       <main className="products center-content p-sm-all">
-        {sortedProducts.length === 0
+        {!loader && sortedProducts.length === 0
           ? 'No products found for applied filters.Please change the filter to get products!'
           : null}
         {!loader ? (
