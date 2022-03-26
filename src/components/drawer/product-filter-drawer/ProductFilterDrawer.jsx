@@ -10,7 +10,7 @@ import { CLEAR_ALL_FILTER } from '../../../shared/actions/types';
 import { useProductFilter } from '../../../shared/context/product-filter-context';
 
 export const ProductFilterDrawer = () => {
-  const { dispatch } = useProductFilter();
+  const { dispatch: productFilterDispatch } = useProductFilter();
   return (
     <>
       <aside className="drawer drawer--permanent">
@@ -19,7 +19,7 @@ export const ProductFilterDrawer = () => {
             <h4>Filters</h4>
             <button
               className="btn btn--default-text btn--clear p-xs-vr p-sm-hr rounded-sm bold-font"
-              onClick={() => dispatch({ type: CLEAR_ALL_FILTER })}
+              onClick={() => productFilterDispatch({ type: CLEAR_ALL_FILTER })}
             >
               CLEAR
             </button>

@@ -8,11 +8,11 @@ export const ProductBasicCard = ({ category }) => {
   const navigate = useNavigate();
   const { categoryName, imgUrl } = category;
 
-  const { dispatch } = useProductFilter();
+  const { dispatch: productFilterDispatch } = useProductFilter();
 
   const onCategorySelection = () => {
     if (categoryName !== 'All Jewellery')
-      dispatch({ type: FILTER_BY_CATEGORY, categoryName });
+      productFilterDispatch({ type: FILTER_BY_CATEGORY, categoryName });
     navigate('/products');
   };
   return (

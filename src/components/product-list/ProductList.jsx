@@ -11,9 +11,9 @@ import { useProductFilter } from '../../shared/context';
 
 export const ProductList = () => {
   const { products, loader } = useProductAsync();
-  const { state } = useProductFilter();
+  const { state: productFilterState } = useProductFilter();
   const { categoryFilter, ratingFilter, priceSortCriteria, priceRangeFilter } =
-    state;
+    productFilterState;
 
   const filteredProducts = getFilteredProducts(
     products,
