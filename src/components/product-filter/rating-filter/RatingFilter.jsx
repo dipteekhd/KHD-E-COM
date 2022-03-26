@@ -1,5 +1,5 @@
 import React from 'react';
-import * as ACTIONS from '../../../shared/actions/types';
+import { FILTER_BY_RATING } from '../../../shared/actions/types';
 import { useProductFilter } from '../../../shared/context';
 
 export const RatingFilter = () => {
@@ -20,7 +20,7 @@ export const RatingFilter = () => {
                 checked={ratingFilter === ratingValue}
                 onChange={() =>
                   dispatch({
-                    type: ACTIONS.FILTER_BY_RATING,
+                    type: FILTER_BY_RATING,
                     ratingValue,
                   })
                 }

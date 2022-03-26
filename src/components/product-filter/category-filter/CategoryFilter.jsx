@@ -1,5 +1,5 @@
 import React from 'react';
-import * as ACTIONS from '../../../shared/actions/types';
+import { FILTER_BY_CATEGORY } from '../../../shared/actions/types';
 import { useCategory, useProductFilter } from '../../../shared/context';
 import './CategoryFilter.scss';
 
@@ -22,7 +22,7 @@ export const CategoryFilter = () => {
                 checked={categoryFilter[c.categoryName]}
                 onChange={() =>
                   dispatch({
-                    type: ACTIONS.FILTER_BY_CATEGORY,
+                    type: FILTER_BY_CATEGORY,
                     categoryName: c.categoryName,
                   })
                 }

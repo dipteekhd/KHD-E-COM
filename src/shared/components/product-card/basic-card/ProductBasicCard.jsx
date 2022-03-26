@@ -1,6 +1,6 @@
 import './ProductBasicCard.scss';
 import React from 'react';
-import * as ACTIONS from '../../../actions/types';
+import { FILTER_BY_CATEGORY } from '../../../actions/types';
 import { useNavigate } from 'react-router-dom';
 import { useProductFilter } from '../../../context/product-filter-context';
 
@@ -12,7 +12,7 @@ export const ProductBasicCard = ({ category }) => {
 
   const onCategorySelection = () => {
     if (categoryName !== 'All Jewellery')
-      dispatch({ type: ACTIONS.FILTER_BY_CATEGORY, categoryName });
+      dispatch({ type: FILTER_BY_CATEGORY, categoryName });
     navigate('/products');
   };
   return (

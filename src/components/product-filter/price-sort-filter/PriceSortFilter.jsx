@@ -1,5 +1,5 @@
 import React from 'react';
-import * as ACTIONS from '../../../shared/actions/types';
+import { SORT_BY_PRICE } from '../../../shared/actions/types';
 import { useProductFilter } from '../../../shared/context';
 
 export const PriceSortFilter = () => {
@@ -23,7 +23,7 @@ export const PriceSortFilter = () => {
                 checked={sortCriteria.key === priceSortCriteria}
                 onChange={() =>
                   dispatch({
-                    type: ACTIONS.SORT_BY_PRICE,
+                    type: SORT_BY_PRICE,
                     sortCriteria: sortCriteria.key,
                   })
                 }
