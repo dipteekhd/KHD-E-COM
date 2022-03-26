@@ -1,10 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import E1 from '../../assets/images/earings/E1.jpg';
-import N1 from '../../assets/images/necklace/N1.jpg';
-import R1 from '../../assets/images/rings/R1.jpg';
-import W1 from '../../assets/images/wedding/wed1.jpg';
-import J1 from '../../assets/images/J.jpg';
-
+import { E1, N1, R1, W1, J1 } from '../../assets';
 /**
  * Category Database can be added here.
  * You can add category of your wish with different attributes
