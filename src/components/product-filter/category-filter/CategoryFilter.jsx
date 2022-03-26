@@ -12,22 +12,22 @@ export const CategoryFilter = () => {
     <>
       <h4>Category</h4>
       <ul className="list">
-        {categories.slice(1).map((c) => (
-          <li key={c._id} className="list__input m-xs-all">
-            <label htmlFor={c._id} className="center-content">
+        {categories.slice(1).map((category) => (
+          <li key={category._id} className="list__input m-xs-all">
+            <label htmlFor={category._id} className="center-content">
               <input
-                id={c._id}
+                id={category._id}
                 type="checkbox"
                 className="m-xs-r"
-                checked={categoryFilter[c.categoryName]}
+                checked={categoryFilter[category.categoryName]}
                 onChange={() =>
                   dispatch({
                     type: FILTER_BY_CATEGORY,
-                    categoryName: c.categoryName,
+                    categoryName: category.categoryName,
                   })
                 }
               />
-              {c.categoryName}
+              {category.categoryName}
             </label>
           </li>
         ))}

@@ -1,14 +1,14 @@
-const c1 = 'Wedding Sets';
-const c2 = 'Necklace';
-const c3 = 'Rings';
-const c4 = 'Earrings';
+const category1 = 'Wedding Sets';
+const category2 = 'Necklace';
+const category3 = 'Rings';
+const category4 = 'Earrings';
 
 export const productFilterState = {
   categoryFilter: {
-    [c1]: false,
-    [c2]: false,
-    [c3]: false,
-    [c4]: false,
+    [category1]: false,
+    [category2]: false,
+    [category3]: false,
+    [category4]: false,
   },
   ratingFilter: 0,
   priceSortCriteria: '',
