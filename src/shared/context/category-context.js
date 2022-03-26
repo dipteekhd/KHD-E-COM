@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import { getProductCategories } from '../services/product.service';
 
 const CategoryContext = createContext({});
 
@@ -9,7 +9,7 @@ const CategoryProvider = ({ children }) => {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await axios.get('/api/categories');
+        const { data } = await getProductCategories();
         setCategories(data.categories);
       } catch (error) {
         alert(error);

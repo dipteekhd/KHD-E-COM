@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { getAllProducts } from '../../shared/services/product.service';
 
 export const useProductAsync = () => {
   const [products, setProducts] = useState([]);
@@ -9,7 +9,7 @@ export const useProductAsync = () => {
     (async () => {
       try {
         setLoader(true);
-        const { data } = await axios.get('/api/products');
+        const { data } = await getAllProducts();
         setProducts(data.products);
         setLoader(false);
       } catch (error) {
