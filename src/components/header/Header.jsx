@@ -1,15 +1,29 @@
 import './Header.scss';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useProductFilter } from '../../shared/context';
+import { useNavigate } from 'react-router-dom';
+import { CLEAR_ALL_FILTER } from '../../shared/actions/types';
 
 export const Header = () => {
+  const navigate = useNavigate();
+  const { dispatch: productFilterDispatch } = useProductFilter();
+  const naviagteToHome = (e) => {
+    e.preventDefault();
+    productFilterDispatch({ type: CLEAR_ALL_FILTER });
+    navigate('/');
+  };
+
   return (
     <header className="header">
       <div className="header__wrapper p-sm-vr">
         <div className="header__title p-sm-hr">
-          <Link to="/">
+          <a
+            className="btn btn--primary-link btn--active semibold-font"
+            onClick={naviagteToHome}
+          >
             <h3>E-Commerce</h3>
-          </Link>
+          </a>
         </div>
 
         <nav className="header__action">
@@ -32,9 +46,12 @@ export const Header = () => {
         </nav>
       </div>
 
-      <a className="btn btn--primary-outline center-content p-xs-vr p-sm-hr rounded-sm bold-font m-sm-r">
+      <Link
+        to="/login"
+        className="btn btn--primary-outline center-content p-xs-vr p-sm-hr rounded-sm bold-font m-sm-r"
+      >
         Login
-      </a>
+      </Link>
     </header>
   );
 };
