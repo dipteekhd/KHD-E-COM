@@ -14,5 +14,13 @@
       height: 80%;
       width: 70%;
     }
+    &__rating {
+      background-color: var(--secondary);
+      color: var(--white);
+      padding: 0.2rem;
+    }
+  }
+  .material-icons--star {
+    font-size: 1rem;
   }
 }

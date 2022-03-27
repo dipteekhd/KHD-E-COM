@@ -1,16 +1,13 @@
 import React from 'react';
 import './ProductVerticalCard.scss';
 
-export const ProductVerticalCard = ({ actionBtnText }) => {
+export const ProductVerticalCard = ({ product, actionBtnText }) => {
+  const { store, price, imgUrl, categoryName, rating } = product;
   return (
     <div className="card card--vr rounded-sm">
       <div className="card__information">
         <div className="card__badge-icon center-content">
-          <img
-            className="card__media"
-            src="https://e-commerce-khd.netlify.app/assets/images/products/Jwellary.jpg"
-            alt="jwellary"
-          />
+          <img className="card__media" src={imgUrl} alt="jwellary" />
           <button
             className="btn btn--default-text rounded-circle bold-font
                     card__action card__action--icon card__action--like"
@@ -19,8 +16,13 @@ export const ProductVerticalCard = ({ actionBtnText }) => {
           </button>
         </div>
         <div className=" card__primary-info text-center p-sm-all">
-          <h4 className="card__title text-grey-400">Amrapali Jewels</h4>
-          <h3 className="card__subtitle">₹3000</h3>
+          <h4 className="card__title">{categoryName}</h4>
+          <h4 className="card__subtitle text-grey-400">{store}</h4>
+          <h3 className="card__subtitle">₹{price}</h3>
+          <div className="card__rating center-content-1 rounded-sm">
+            <span>{rating}</span>
+            <span className="material-icons material-icons--star">star</span>
+          </div>
         </div>
       </div>
 
