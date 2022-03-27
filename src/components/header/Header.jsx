@@ -62,12 +62,17 @@ export const Header = () => {
           Login
         </Link>
       ) : (
-        <button
-          className="btn btn--primary-outline center-content p-xs-vr p-sm-hr rounded-sm bold-font m-sm-r"
-          onClick={logout}
-        >
-          Logout
-        </button>
+        <>
+          <h4 className="m-xs-r">
+            Welcome {authState.userData.firstName + authState.userData.lastName}
+          </h4>
+          <button
+            className="btn btn--primary-outline center-content p-xs-vr p-sm-hr rounded-sm bold-font m-sm-r"
+            onClick={logout}
+          >
+            Logout
+          </button>
+        </>
       )}
     </header>
   );
