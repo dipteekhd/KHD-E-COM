@@ -10,7 +10,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const userToken = localStorage.getItem('userToken');
-    const userData = localStorage.getItem('userData');
+    const userData = JSON.parse(localStorage.getItem('userData'));
 
     dispatch({
       type: INITIALIZE_AUTH,
