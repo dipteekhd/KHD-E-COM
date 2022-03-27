@@ -19,7 +19,7 @@ export const CategoryFilter = () => {
                 id={category._id}
                 type="checkbox"
                 className="m-xs-r"
-                checked={categoryFilter[category.categoryName]}
+                checked={categoryFilter[category.categoryName] ? true : false}
                 onChange={() =>
                   dispatch({
                     type: FILTER_BY_CATEGORY,
