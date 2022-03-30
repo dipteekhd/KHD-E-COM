@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAlert, useAuth, useWishList } from '../../../context';
 import {
   deleteProductFromWishList,
@@ -6,7 +6,6 @@ import {
 } from '../../../services/product.service';
 import './ProductVerticalCard.scss';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react/cjs/react.development';
 import {
   INCREMENT_WISH_COUNT,
   DECREMENT_WISH_COUNT,
