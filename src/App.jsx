@@ -8,13 +8,13 @@ import {
   Home,
 } from './components';
 import { Route, Routes } from 'react-router-dom';
-
 import { Login, Signup } from './components/authentication';
+import { AlertMessage } from './shared/components';
 const App = () => {
   return (
     <>
       <Header></Header>
-
+      <AlertMessage></AlertMessage>
       <div className="content">
         <Routes>
           <Route path="/" element={<Home />} />

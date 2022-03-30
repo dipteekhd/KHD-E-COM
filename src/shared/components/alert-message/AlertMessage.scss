@@ -1,0 +1,9 @@
+.app-alert {
+  width: 100%;
+  position: fixed;
+  z-index: 99999;
+  top: 0.5rem;
+  .alert {
+    margin: auto;
+  }
+}
