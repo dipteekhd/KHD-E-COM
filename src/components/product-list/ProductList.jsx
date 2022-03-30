@@ -8,9 +8,15 @@ import {
   getSortedProducts,
 } from '../../shared/product.util';
 import { useProductFilter } from '../../shared/context';
+import { useWishListAsync } from '../../shared/custom-hook';
 
 export const ProductList = () => {
   const { products, loader } = useProductAsync();
+  const { wishList } = useWishListAsync();
+
+  const wishListMapped = {};
+  wishList.forEach((item) => (wishListMapped[item._id] = item));
+
   const { state: productFilterState } = useProductFilter();
   const { categoryFilter, ratingFilter, priceSortCriteria, priceRangeFilter } =
     productFilterState;
@@ -46,6 +52,7 @@ export const ProductList = () => {
             <ProductVerticalCard
               key={product._id}
               product={product}
+              isInWishList={wishListMapped[product._id] ? true : false}
               actionBtnText="ADD TO CART"
             ></ProductVerticalCard>
           ))}

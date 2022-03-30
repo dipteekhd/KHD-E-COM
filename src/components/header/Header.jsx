@@ -1,15 +1,15 @@
 import './Header.scss';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth, useProductFilter } from '../../shared/context';
+import { useAuth, useProductFilter, useWishList } from '../../shared/context';
 import { useNavigate } from 'react-router-dom';
-import { CLEAR_ALL_FILTER } from '../../shared/actions/types';
-import { LOG_OUT_SUCCESS } from '../../shared/actions/types';
+import { CLEAR_ALL_FILTER, LOG_OUT_SUCCESS } from '../../shared/actions/types';
 
 export const Header = () => {
   const navigate = useNavigate();
   const { dispatch: productFilterDispatch } = useProductFilter();
   const { state: authState, dispatch: authDispatch } = useAuth();
+  const { wishListState } = useWishList();
 
   const naviagteToHome = (e) => {
     e.preventDefault();
@@ -17,9 +17,17 @@ export const Header = () => {
     navigate('/');
   };
 
+  const navigateToWishList = (e) => {
+    e.preventDefault();
+    authState.isUserLoggedIn
+      ? navigate('/ProductWishList')
+      : navigate('/login');
+  };
+
   const logout = () => {
     localStorage.removeItem('userToken');
     localStorage.removeItem('userData');
+    navigate('/');
     authDispatch({ type: LOG_OUT_SUCCESS });
   };
 
@@ -36,14 +44,19 @@ export const Header = () => {
         </div>
 
         <nav className="header__action">
-          <a className="button-icon rounded-circle center-content-1 m-sm-r">
+          <button
+            onClick={navigateToWishList}
+            className="button-icon rounded-circle center-content-1 m-sm-r"
+          >
             <span className="material-icons material-icons--notification">
               favorite
             </span>
             <span className="icon-badge rounded-circle center-content bold-font">
-              0
+              {authState.isUserLoggedIn
+                ? wishListState.totalProductsInwishList
+                : 0}
             </span>
-          </a>
+          </button>
           <a className="button-icon rounded-circle center-content-1 m-sm-r">
             <span className="material-icons material-icons--notification">
               shopping_cart

@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { login } from '../../shared/services/user.service';
 import './Authentication.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../shared/context';
-import { LOG_IN_SUCCESS } from '../../shared/actions/types';
+import { useAuth, useWishList } from '../../shared/context';
+import {
+  LOG_IN_SUCCESS,
+  INITIALIZE_WISH_COUNT,
+} from '../../shared/actions/types';
 
 export const Login = () => {
   const [userCredential, setUserCredential] = useState({
@@ -15,6 +18,7 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const { dispatch: authDispatch } = useAuth();
+  const { wishListDispatch } = useWishList();
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -28,6 +32,10 @@ export const Login = () => {
         authDispatch({
           type: LOG_IN_SUCCESS,
           payload: { userToken: encodedToken, userData: foundUser },
+        });
+        wishListDispatch({
+          type: INITIALIZE_WISH_COUNT,
+          totalProductsInwishList: foundUser.wishlist.length,
         });
         navigate(-1);
       }
