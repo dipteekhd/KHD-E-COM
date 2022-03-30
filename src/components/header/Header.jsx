@@ -1,17 +1,26 @@
 import './Header.scss';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useProductFilter } from '../../shared/context';
+import { useAuth, useProductFilter } from '../../shared/context';
 import { useNavigate } from 'react-router-dom';
 import { CLEAR_ALL_FILTER } from '../../shared/actions/types';
+import { LOG_OUT_SUCCESS } from '../../shared/actions/types';
 
 export const Header = () => {
   const navigate = useNavigate();
   const { dispatch: productFilterDispatch } = useProductFilter();
+  const { state: authState, dispatch: authDispatch } = useAuth();
+
   const naviagteToHome = (e) => {
     e.preventDefault();
     productFilterDispatch({ type: CLEAR_ALL_FILTER });
     navigate('/');
+  };
+
+  const logout = () => {
+    localStorage.removeItem('userToken');
+    localStorage.removeItem('userData');
+    authDispatch({ type: LOG_OUT_SUCCESS });
   };
 
   return (
@@ -45,13 +54,26 @@ export const Header = () => {
           </a>
         </nav>
       </div>
-
-      <Link
-        to="/login"
-        className="btn btn--primary-outline center-content p-xs-vr p-sm-hr rounded-sm bold-font m-sm-r"
-      >
-        Login
-      </Link>
+      {!authState.isUserLoggedIn ? (
+        <Link
+          to="/login"
+          className="btn btn--primary-outline center-content p-xs-vr p-sm-hr rounded-sm bold-font m-sm-r"
+        >
+          Login
+        </Link>
+      ) : (
+        <>
+          <h4 className="m-xs-r">
+            Welcome {authState.userData.firstName + authState.userData.lastName}
+          </h4>
+          <button
+            className="btn btn--primary-outline center-content p-xs-vr p-sm-hr rounded-sm bold-font m-sm-r"
+            onClick={logout}
+          >
+            Logout
+          </button>
+        </>
+      )}
     </header>
   );
 };

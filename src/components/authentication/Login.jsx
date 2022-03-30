@@ -1,7 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { login } from '../../shared/services/user.service';
 import './Authentication.scss';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../shared/context';
+import { LOG_IN_SUCCESS } from '../../shared/actions/types';
 
 export const Login = () => {
+  const [userCredential, setUserCredential] = useState({
+    email: '',
+    password: '',
+  });
+  const { email, password } = userCredential;
+
+  const navigate = useNavigate();
+
+  const { dispatch: authDispatch } = useAuth();
+
+  const onLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const { data, status } = await login(userCredential);
+      if (status === 201) alert('Wrong credentials!'); //temp handling
+      if (status === 200) {
+        const { encodedToken, foundUser } = data;
+        localStorage.setItem('userToken', encodedToken);
+        localStorage.setItem('userData', JSON.stringify(foundUser));
+        authDispatch({
+          type: LOG_IN_SUCCESS,
+          payload: { userToken: encodedToken, userData: foundUser },
+        });
+        navigate(-1);
+      }
+    } catch (error) {
+      if (error.response.status === 404) alert(error.response.data.errors[0]);
+      if (error.response.status === 500) alert('Server error');
+    }
+  };
+
   return (
     <main className="authenticate center-content">
       <div className="card rounded-sm">
@@ -17,6 +52,13 @@ export const Login = () => {
                   className="input-container__auth p-xs-all rounded-sm"
                   type="text"
                   placeholder="Enter Email"
+                  value={email}
+                  onChange={(e) =>
+                    setUserCredential((prevState) => ({
+                      ...prevState,
+                      email: e.target.value,
+                    }))
+                  }
                 />
               </div>
               <div className="input-container p-sm-b">
@@ -27,6 +69,13 @@ export const Login = () => {
                   className="input-container__auth p-xs-all rounded-sm"
                   type="password"
                   placeholder="Enter Password"
+                  value={password}
+                  onChange={(e) =>
+                    setUserCredential((prevState) => ({
+                      ...prevState,
+                      password: e.target.value,
+                    }))
+                  }
                 />
               </div>
             </div>
@@ -43,12 +92,21 @@ export const Login = () => {
           </div>
 
           <div className="card__action-stack m-sm-all">
-            <a className="btn btn--primary p-xs-vr p-sm-hr m-sm-b rounded-sm bold-font">
+            <button
+              className={`btn ${
+                email && password ? 'btn--primary' : 'btn--primary-disabled'
+              } p-xs-vr p-sm-hr m-sm-b rounded-sm bold-font`}
+              disabled={!email || !password}
+              onClick={onLogin}
+            >
               LOGIN
-            </a>
-            <a className="btn btn--primary-link btn--active semibold-font">
+            </button>
+            <Link
+              to="/signup"
+              className="btn btn--primary-link btn--active semibold-font"
+            >
               Create New Account
-            </a>
+            </Link>
           </div>
         </form>
       </div>
