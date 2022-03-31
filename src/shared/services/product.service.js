@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+const getUserToken = () => {
+  return localStorage.getItem('userToken');
+};
+
 const getProductCategories = () => {
   return axios.get('/api/categories');
 };
@@ -13,7 +17,7 @@ const getProductCart = () => {
 };
 
 const getProductWishList = () => {
-  const encodedToken = localStorage.getItem('userToken');
+  const encodedToken = getUserToken();
   return axios.get('/api/user/wishlist', {
     headers: {
       authorization: encodedToken, // passing token as an authorization header
@@ -21,7 +25,7 @@ const getProductWishList = () => {
   });
 };
 const saveProductInWishList = (product) => {
-  const encodedToken = localStorage.getItem('userToken');
+  const encodedToken = getUserToken();
   return axios.post(
     '/api/user/wishlist',
     { product },
@@ -34,7 +38,7 @@ const saveProductInWishList = (product) => {
 };
 
 const deleteProductFromWishList = (productId) => {
-  const encodedToken = localStorage.getItem('userToken');
+  const encodedToken = getUserToken();
   return axios.delete(`/api/user/wishlist/${productId}`, {
     headers: {
       authorization: encodedToken, // passing token as an authorization header
