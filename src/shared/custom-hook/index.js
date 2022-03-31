@@ -1,0 +1,1 @@
+export { useWishListAsync } from './useWishListAsync';

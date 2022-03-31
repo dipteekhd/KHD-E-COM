@@ -9,7 +9,6 @@ const ProductFilterProvider = ({ children }) => {
     productFilterReducer,
     productFilterState
   );
-  console.log(state);
 
   return (
     <ProductFilterContext.Provider value={{ state, dispatch }}>

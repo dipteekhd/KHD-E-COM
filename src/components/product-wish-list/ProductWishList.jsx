@@ -1,17 +1,26 @@
 import React from 'react';
+import { useWishListAsync } from '../../shared/custom-hook';
 import './ProductWishList.scss';
 import { ProductVerticalCard } from '../../shared/components';
 
 export const ProductWishList = () => {
+  const { wishList, setWishList } = useWishListAsync();
+  const removeProductFromWishList = (productId) => {
+    setWishList(wishList.filter((product) => product._id !== productId));
+  };
   return (
     <main className="m-sm-all">
-      <h3 className="m-sm-all center-content">My Wishlist (2)</h3>
+      <h3 className="m-sm-all center-content">
+        My Wishlist ({wishList.length})
+      </h3>
       <section className="wish-list center-content">
-        {[1, 2, 3].map((product) => (
+        {wishList.map((product) => (
           <ProductVerticalCard
-            key={product}
-            {...product}
+            key={product._id}
+            product={product}
+            isInWishList={true}
             actionBtnText="MOVE TO CART"
+            removeProductFromWishList={removeProductFromWishList}
           ></ProductVerticalCard>
         ))}
       </section>
