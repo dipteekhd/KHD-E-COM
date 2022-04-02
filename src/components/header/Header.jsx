@@ -1,7 +1,12 @@
 import './Header.scss';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth, useProductFilter, useWishList } from '../../shared/context';
+import {
+  useAuth,
+  useCart,
+  useProductFilter,
+  useWishList,
+} from '../../shared/context';
 import { useNavigate } from 'react-router-dom';
 import { CLEAR_ALL_FILTER, LOG_OUT_SUCCESS } from '../../shared/actions/types';
 
@@ -10,18 +15,21 @@ export const Header = () => {
   const { dispatch: productFilterDispatch } = useProductFilter();
   const { state: authState, dispatch: authDispatch } = useAuth();
   const { wishListState } = useWishList();
+  const { cartState } = useCart();
 
-  const naviagteToHome = (e) => {
-    e.preventDefault();
+  const naviagteToHome = () => {
     productFilterDispatch({ type: CLEAR_ALL_FILTER });
     navigate('/');
   };
 
-  const navigateToWishList = (e) => {
-    e.preventDefault();
+  const navigateToWishList = () => {
     authState.isUserLoggedIn
       ? navigate('/ProductWishList')
       : navigate('/login');
+  };
+
+  const navigateToCart = () => {
+    authState.isUserLoggedIn ? navigate('/ProductCart') : navigate('/login');
   };
 
   const logout = () => {
@@ -57,14 +65,17 @@ export const Header = () => {
                 : 0}
             </span>
           </button>
-          <a className="button-icon rounded-circle center-content-1 m-sm-r">
+          <button
+            onClick={navigateToCart}
+            className="button-icon rounded-circle center-content-1 m-sm-r"
+          >
             <span className="material-icons material-icons--notification">
               shopping_cart
             </span>
             <span className="icon-badge rounded-circle center-content bold-font">
-              0
+              {authState.isUserLoggedIn ? cartState.totalProductsInCart : 0}
             </span>
-          </a>
+          </button>
         </nav>
       </div>
       {!authState.isUserLoggedIn ? (

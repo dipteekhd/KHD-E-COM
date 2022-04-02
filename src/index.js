@@ -11,6 +11,7 @@ import {
   CategoryProvider,
   WishListProvider,
   AlertMessageProvider,
+  CartProvider,
 } from './shared/context';
 
 // Call make Server
@@ -24,7 +25,9 @@ ReactDOM.render(
           <CategoryProvider>
             <ProductFilterProvider>
               <WishListProvider>
-                <App />
+                <CartProvider>
+                  <App />
+                </CartProvider>
               </WishListProvider>
             </ProductFilterProvider>
           </CategoryProvider>

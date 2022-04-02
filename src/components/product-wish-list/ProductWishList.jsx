@@ -1,10 +1,15 @@
 import React from 'react';
-import { useWishListAsync } from '../../shared/custom-hook';
+import { useWishListAsync, useCartAsync } from '../../shared/custom-hook';
 import './ProductWishList.scss';
 import { ProductVerticalCard } from '../../shared/components';
 
 export const ProductWishList = () => {
   const { wishList, setWishList } = useWishListAsync();
+  const { cart } = useCartAsync();
+
+  const cartMapped = {};
+  cart.forEach((item) => (cartMapped[item._id] = item));
+
   const removeProductFromWishList = (productId) => {
     setWishList(wishList.filter((product) => product._id !== productId));
   };
@@ -19,7 +24,8 @@ export const ProductWishList = () => {
             key={product._id}
             product={product}
             isInWishList={true}
-            actionBtnText="MOVE TO CART"
+            inCart={cartMapped[product._id] ? true : false}
+            actionBtnText={'MOVE TO CART'}
             removeProductFromWishList={removeProductFromWishList}
           ></ProductVerticalCard>
         ))}

@@ -1,6 +1,10 @@
 import './ProductCartPrice.scss';
 import React from 'react';
-export const ProductCartPrice = () => {
+
+export const ProductCartPrice = ({ cart }) => {
+  const { price, discount } = calculateTotalPrice(cart);
+  const deliveryCharge = 50;
+
   return (
     <div className="card rounded-sm shadow">
       <div className="card__info-action m-sm-all">
@@ -8,12 +12,12 @@ export const ProductCartPrice = () => {
           <h4 className="card__title p-xs-b">PRICE DETAILS</h4>
           <hr />
           <div className="card__amount p-xs-vr">
-            <p>Price(2 items)</p>
-            <p>₹3000</p>
+            <p>Price({cart.length} items)</p>
+            <p>₹{price}</p>
           </div>
           <div className="card__amount p-xs-b">
             <p>Discount</p>
-            <p>-₹500</p>
+            <p>-₹{discount}</p>
           </div>
           <div className="card__amount p-xs-b">
             <p>Delivery Charges</p>
@@ -22,7 +26,7 @@ export const ProductCartPrice = () => {
           <hr />
           <div className="card__amount p-xs-vr">
             <h4>TOTAL AMOUNT</h4>
-            <p>₹50</p>
+            <p>₹{price - discount + deliveryCharge}</p>
           </div>
           <p>You will save ₹500 on this order</p>
         </div>
@@ -37,4 +41,18 @@ export const ProductCartPrice = () => {
       </div>
     </div>
   );
+};
+
+const calculateTotalPrice = (cart) => {
+  const initialCost = {
+    price: 0,
+    discount: 0,
+  };
+  const totalCost = cart.reduce((acc, curr) => {
+    const discount = curr.price * (Number(curr.discount) / 100);
+    acc.price += curr.price * curr.qty;
+    acc.discount += discount * curr.qty;
+    return acc;
+  }, initialCost);
+  return totalCost;
 };

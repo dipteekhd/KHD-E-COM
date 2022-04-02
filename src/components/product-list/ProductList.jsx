@@ -8,14 +8,18 @@ import {
   getSortedProducts,
 } from '../../shared/product.util';
 import { useProductFilter } from '../../shared/context';
-import { useWishListAsync } from '../../shared/custom-hook';
+import { useCartAsync, useWishListAsync } from '../../shared/custom-hook';
 
 export const ProductList = () => {
   const { products, loader } = useProductAsync();
   const { wishList } = useWishListAsync();
+  const { cart } = useCartAsync();
 
   const wishListMapped = {};
   wishList.forEach((item) => (wishListMapped[item._id] = item));
+
+  const cartMapped = {};
+  cart.forEach((item) => (cartMapped[item._id] = item));
 
   const { state: productFilterState } = useProductFilter();
   const { categoryFilter, ratingFilter, priceSortCriteria, priceRangeFilter } =
@@ -53,7 +57,9 @@ export const ProductList = () => {
               key={product._id}
               product={product}
               isInWishList={wishListMapped[product._id] ? true : false}
-              actionBtnText="ADD TO CART"
+              actionBtnText={
+                cartMapped[product._id] ? 'GO TO CART' : 'ADD TO CART'
+              }
             ></ProductVerticalCard>
           ))}
         </section>
