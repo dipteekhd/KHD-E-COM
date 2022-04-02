@@ -104,7 +104,9 @@ export const ProductHorizontalCard = ({
               </button>
               <div className="card__quantity p-xs-hr">{qty}</div>
               <button
-                onClick={() => updateQuantity(qty - 1, 'decrement')}
+                onClick={() => {
+                  if (qty - 1 > 0) updateQuantity(qty - 1, 'decrement');
+                }}
                 className="btn btn--primary-outline btn--quantity rounded-circle bold-font"
               >
                 -
