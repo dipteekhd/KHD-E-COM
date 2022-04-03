@@ -4,6 +4,8 @@ import { useAuth } from '../context';
 
 export const useWishListAsync = () => {
   const [wishList, setWishList] = useState([]);
+  const [loader, setLoader] = useState(false);
+
   const { state: authState } = useAuth();
 
   useEffect(() => {
@@ -16,8 +18,10 @@ export const useWishListAsync = () => {
     if (authState.isUserLoggedIn) {
       (async () => {
         try {
+          setLoader(true);
           const { data } = await getProductWishList();
           setWishList(data.wishlist);
+          setLoader(false);
         } catch (error) {
           alert(error);
         }
@@ -26,5 +30,5 @@ export const useWishListAsync = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return { wishList, setWishList };
+  return { wishList, setWishList, loader };
 };

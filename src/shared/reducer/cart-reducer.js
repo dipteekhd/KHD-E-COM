@@ -4,7 +4,6 @@ import {
   INITIALIZE_CART_COUNT,
 } from '../actions/types';
 export const cartReducer = (state, action) => {
-  console.log('cart reducer');
   switch (action.type) {
     case INITIALIZE_CART_COUNT: {
       return { ...state, totalProductsInCart: action.totalProductsInCart };

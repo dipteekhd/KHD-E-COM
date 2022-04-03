@@ -1,6 +1,6 @@
 import React from 'react';
 import './ProductList.scss';
-import { ProductVerticalCard } from '../../shared/components';
+import { Loader, ProductVerticalCard } from '../../shared/components';
 import { ProductFilterDrawer } from '../../components';
 import { useProductAsync } from './useProductAsync';
 import {
@@ -46,11 +46,7 @@ export const ProductList = () => {
             results
           </h4>
         ) : null}
-        {loader ? (
-          <div className="alert alert--info  p-sm-all rounded-sm" role="alert">
-            <p className="text-sm">Loading...</p>
-          </div>
-        ) : null}
+        {loader ? <Loader></Loader> : null}
         <section className="product-list center-content">
           {sortedProducts.map((product) => (
             <ProductVerticalCard
