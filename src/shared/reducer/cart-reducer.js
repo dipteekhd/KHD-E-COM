@@ -6,7 +6,10 @@ import {
 export const cartReducer = (state, action) => {
   switch (action.type) {
     case INITIALIZE_CART_COUNT: {
-      return { ...state, totalProductsInCart: action.totalProductsInCart };
+      return {
+        ...state,
+        totalProductsInCart: action.payload.totalProductsInCart,
+      };
     }
     case INCREMENT_CART_COUNT: {
       return { ...state, totalProductsInCart: state.totalProductsInCart + 1 };

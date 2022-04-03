@@ -9,7 +9,7 @@ export const wishListReducer = (state, action) => {
     case INITIALIZE_WISH_COUNT: {
       return {
         ...state,
-        totalProductsInwishList: action.totalProductsInwishList,
+        totalProductsInwishList: action.payload.totalProductsInwishList,
       };
     }
     case INCREMENT_WISH_COUNT: {
