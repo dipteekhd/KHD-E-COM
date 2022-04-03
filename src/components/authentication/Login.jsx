@@ -10,8 +10,8 @@ import {
 
 export const Login = () => {
   const [userCredential, setUserCredential] = useState({
-    email: '',
-    password: '',
+    email: 'adarshbalika@gmail.com',
+    password: 'adarshbalika',
   });
   const { email, password } = userCredential;
 
