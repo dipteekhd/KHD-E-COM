@@ -1,5 +1,6 @@
 import './ProductCartPrice.scss';
 import React from 'react';
+import { calculateTotalPrice } from '../../product.util';
 
 export const ProductCartPrice = ({ cart }) => {
   const { price, discount } = calculateTotalPrice(cart);
@@ -41,18 +42,4 @@ export const ProductCartPrice = ({ cart }) => {
       </div>
     </div>
   );
-};
-
-const calculateTotalPrice = (cart) => {
-  const initialCost = {
-    price: 0,
-    discount: 0,
-  };
-  const totalCost = cart.reduce((acc, curr) => {
-    const discount = curr.price * (Number(curr.discount) / 100);
-    acc.price += curr.price * curr.qty;
-    acc.discount += discount * curr.qty;
-    return acc;
-  }, initialCost);
-  return totalCost;
 };
