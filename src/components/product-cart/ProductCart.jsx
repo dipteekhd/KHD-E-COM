@@ -5,6 +5,7 @@ import {
   ProductCartPrice,
 } from '../../shared/components';
 import { useCartAsync, useWishListAsync } from '../../shared/custom-hook';
+import { Link } from 'react-router-dom';
 
 export const ProductCartList = () => {
   const { cart, setCart } = useCartAsync();
@@ -27,6 +28,17 @@ export const ProductCartList = () => {
   return (
     <main className="m-sm-all">
       <h3 className="m-sm-all center-content">My Cart ({cart.length})</h3>
+      {cart.length === 0 ? (
+        <div className="center-content">
+          <h4>Your cart is empty !</h4>
+          <Link
+            className="btn btn--primary-link btn--active semibold-font m-xs-l"
+            to="/products"
+          >
+            Shop now
+          </Link>
+        </div>
+      ) : null}
 
       <section className="cart-main">
         <section className="product-cart">
