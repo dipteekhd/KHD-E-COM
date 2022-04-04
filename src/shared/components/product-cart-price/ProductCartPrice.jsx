@@ -29,7 +29,7 @@ export const ProductCartPrice = ({ cart }) => {
             <h4>TOTAL AMOUNT</h4>
             <p>₹{price - discount + deliveryCharge}</p>
           </div>
-          <p>You will save ₹500 on this order</p>
+          <p>You will save ₹{discount} on this order</p>
         </div>
         <div className="card__action-stack p-xs-all">
           <button
