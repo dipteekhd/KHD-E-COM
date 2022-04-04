@@ -40,7 +40,7 @@ export const ProductVerticalCard = ({
   }, [actionBtnText]);
 
   /** Adds or Removes product from wishlist when user clicks on heart button of product card */
-  const addRemoveWishList = async () => {
+  const onWishListAction = async () => {
     setWishListToggle(!wishListToggle);
     try {
       if (authState.isUserLoggedIn) {
@@ -151,7 +151,7 @@ export const ProductVerticalCard = ({
           <button
             className="btn btn--default-text rounded-circle bold-font
                     card__action card__action--icon card__action--like"
-            onClick={addRemoveWishList}
+            onClick={onWishListAction}
           >
             <span className="material-icons">
               {wishListToggle ? 'favorite' : 'favorite_border'}
