@@ -1,6 +1,6 @@
 import React from 'react';
 import './ProductList.scss';
-import { ProductVerticalCard } from '../../shared/components';
+import { Loader, ProductVerticalCard } from '../../shared/components';
 import { ProductFilterDrawer } from '../../components';
 import { useProductAsync } from './useProductAsync';
 import {
@@ -8,14 +8,18 @@ import {
   getSortedProducts,
 } from '../../shared/product.util';
 import { useProductFilter } from '../../shared/context';
-import { useWishListAsync } from '../../shared/custom-hook';
+import { useCartAsync, useWishListAsync } from '../../shared/custom-hook';
 
 export const ProductList = () => {
   const { products, loader } = useProductAsync();
   const { wishList } = useWishListAsync();
+  const { cart } = useCartAsync();
 
   const wishListMapped = {};
   wishList.forEach((item) => (wishListMapped[item._id] = item));
+
+  const cartMapped = {};
+  cart.forEach((item) => (cartMapped[item._id] = item));
 
   const { state: productFilterState } = useProductFilter();
   const { categoryFilter, ratingFilter, priceSortCriteria, priceRangeFilter } =
@@ -42,18 +46,16 @@ export const ProductList = () => {
             results
           </h4>
         ) : null}
-        {loader ? (
-          <div className="alert alert--info  p-sm-all rounded-sm" role="alert">
-            <p className="text-sm">Loading...</p>
-          </div>
-        ) : null}
+        {loader ? <Loader></Loader> : null}
         <section className="product-list center-content">
           {sortedProducts.map((product) => (
             <ProductVerticalCard
               key={product._id}
               product={product}
               isInWishList={wishListMapped[product._id] ? true : false}
-              actionBtnText="ADD TO CART"
+              actionBtnText={
+                cartMapped[product._id] ? 'GO TO CART' : 'ADD TO CART'
+              }
             ></ProductVerticalCard>
           ))}
         </section>

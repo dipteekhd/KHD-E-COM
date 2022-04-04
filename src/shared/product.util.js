@@ -37,3 +37,17 @@ export const getFilteredProducts = (
 
   return filteredProducts;
 };
+
+export const calculateTotalPrice = (cart) => {
+  const initialCost = {
+    price: 0,
+    discount: 0,
+  };
+  const totalCost = cart.reduce((acc, curr) => {
+    const discount = curr.price * (Number(curr.discount) / 100);
+    acc.price += curr.price * curr.qty;
+    acc.discount += discount * curr.qty;
+    return acc;
+  }, initialCost);
+  return totalCost;
+};

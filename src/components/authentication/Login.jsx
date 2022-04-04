@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import { login } from '../../shared/services/user.service';
 import './Authentication.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth, useWishList } from '../../shared/context';
+import { useAuth, useCart, useWishList } from '../../shared/context';
 import {
   LOG_IN_SUCCESS,
   INITIALIZE_WISH_COUNT,
+  INITIALIZE_CART_COUNT,
 } from '../../shared/actions/types';
 
 export const Login = () => {
   const [userCredential, setUserCredential] = useState({
-    email: '',
-    password: '',
+    email: 'adarshbalika@gmail.com',
+    password: 'adarshbalika',
   });
   const { email, password } = userCredential;
 
@@ -19,6 +20,7 @@ export const Login = () => {
 
   const { dispatch: authDispatch } = useAuth();
   const { wishListDispatch } = useWishList();
+  const { cartDispatch } = useCart();
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -35,7 +37,11 @@ export const Login = () => {
         });
         wishListDispatch({
           type: INITIALIZE_WISH_COUNT,
-          totalProductsInwishList: foundUser.wishlist.length,
+          payload: { totalProductsInwishList: foundUser.wishlist.length },
+        });
+        cartDispatch({
+          type: INITIALIZE_CART_COUNT,
+          payload: { totalProductsInCart: foundUser.cart.length },
         });
         navigate(-1);
       }

@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react';
-import { getProductWishList } from '../services/product.service';
 import { useAuth } from '../context';
+import { getProductCart } from '../services/product.service';
 
-export const useWishListAsync = () => {
-  const [wishList, setWishList] = useState([]);
+export const useCartAsync = () => {
+  const [cart, setCart] = useState([]);
   const [loader, setLoader] = useState(false);
-
   const { state: authState } = useAuth();
 
   useEffect(() => {
     if (!authState.isUserLoggedIn) {
-      setWishList([]);
+      setCart([]);
     }
   }, [authState]);
 
@@ -19,8 +18,8 @@ export const useWishListAsync = () => {
       (async () => {
         try {
           setLoader(true);
-          const { data } = await getProductWishList();
-          setWishList(data.wishlist);
+          const { data } = await getProductCart();
+          setCart(data.cart);
           setLoader(false);
         } catch (error) {
           alert(error);
@@ -30,5 +29,5 @@ export const useWishListAsync = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return { wishList, setWishList, loader };
+  return { cart, setCart, loader };
 };
