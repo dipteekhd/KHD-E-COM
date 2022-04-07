@@ -22,16 +22,6 @@ export const Header = () => {
     navigate('/');
   };
 
-  const navigateToWishList = () => {
-    authState.isUserLoggedIn
-      ? navigate('/ProductWishList')
-      : navigate('/login');
-  };
-
-  const navigateToCart = () => {
-    authState.isUserLoggedIn ? navigate('/ProductCart') : navigate('/login');
-  };
-
   const logout = () => {
     localStorage.removeItem('userToken');
     localStorage.removeItem('userData');
@@ -53,7 +43,7 @@ export const Header = () => {
 
         <nav className="header__action">
           <button
-            onClick={navigateToWishList}
+            onClick={() => navigate('/ProductWishList')}
             className="button-icon rounded-circle center-content-1 m-sm-r"
           >
             <span className="material-icons material-icons--notification">
@@ -66,7 +56,7 @@ export const Header = () => {
             </span>
           </button>
           <button
-            onClick={navigateToCart}
+            onClick={() => navigate('/ProductCart')}
             className="button-icon rounded-circle center-content-1 m-sm-r"
           >
             <span className="material-icons material-icons--notification">
