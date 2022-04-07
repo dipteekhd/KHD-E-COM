@@ -15,6 +15,7 @@
 - React Hooks
 - React Context
 - [KHD-UI](https://khd-ui.netlify.app/) Component library
+- [MockBee](https://mockbee.netlify.app) Fake Backend
 
 # Features
 
@@ -22,6 +23,6 @@
 - Product Listing-Filtering
 - Cart Management
 - Wishlist Management
-- Login
+- Login with test credentials
 
 -[KHD-E-COMMERCE](https://khd-e-com.netlify.app/)
