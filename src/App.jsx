@@ -8,8 +8,9 @@ import {
   Home,
 } from './components';
 import { Route, Routes } from 'react-router-dom';
-import { Login, Signup } from './components/authentication';
+import { Login, Signup, RequiresAuth } from './components/authentication';
 import { AlertMessage } from './shared/components';
+
 const App = () => {
   return (
     <>
@@ -21,8 +22,22 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/products" element={<ProductList />} />
-          <Route path="/productWishList" element={<ProductWishList />} />
-          <Route path="/productCart" element={<ProductCartList />} />
+          <Route
+            path="/productWishList"
+            element={
+              <RequiresAuth>
+                <ProductWishList />
+              </RequiresAuth>
+            }
+          />
+          <Route
+            path="/productCart"
+            element={
+              <RequiresAuth>
+                <ProductCartList />
+              </RequiresAuth>
+            }
+          />
         </Routes>
       </div>
     </>

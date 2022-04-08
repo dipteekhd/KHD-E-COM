@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { login } from '../../shared/services/user.service';
 import './Authentication.scss';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth, useCart, useWishList } from '../../shared/context';
 import {
   LOG_IN_SUCCESS,
@@ -21,6 +21,9 @@ export const Login = () => {
   const { dispatch: authDispatch } = useAuth();
   const { wishListDispatch } = useWishList();
   const { cartDispatch } = useCart();
+
+  const location = useLocation();
+  const from = location.state?.from?.pathname;
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -43,7 +46,10 @@ export const Login = () => {
           type: INITIALIZE_CART_COUNT,
           payload: { totalProductsInCart: foundUser.cart.length },
         });
-        navigate(-1);
+
+        from
+          ? navigate(from, { replace: true })
+          : navigate(-1, { replace: true });
       }
     } catch (error) {
       if (error.response.status === 404) alert(error.response.data.errors[0]);
